@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $jobs = Job::all();
 
-    dd($jobs);
-//    return view('home');
+    return view('home');
 });
 
 Route::get('/jobs', function () {
+    $jobs = Job::with('employer')->get();
+
     return view('jobs', [
-        'jobs' => Job::all()
+        'jobs' => $jobs,
     ]);
 });
 
